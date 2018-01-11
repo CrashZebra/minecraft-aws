@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  minecraft:
+    image: itzg/minecraft-server
+    ports:
+      - "25565:25565"
+      - "25575:25575"
+    volumes:
+      - "mc:/data"
+    environment:
+      EULA: "TRUE"
+      CONSOLE: "false"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "minecraft"
+      RCON_PORT: 25575
+    restart: always
+    stdin_open: TRUE
+  minecraft_backup:
+    image: abidingattempt/minecraft-server-backup
+    volumes:
+      - "mc:/data"
+    environment:
+      RCON_HOST: "minecraft"
+      RCON_PASSWORD: "minecraft"
+      RCON_PORT: 25575    
+
+volumes:
+  mc:
