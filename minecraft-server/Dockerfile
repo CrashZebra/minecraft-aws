@@ -1,8 +1,8 @@
-FROM openjdk:8u131-jre-alpine
+FROM openjdk:8-jre-alpine
 
-LABEL maintainer "itzg"
+# LABEL maintainer "itzg"
 
-RUN apk add -U \
+RUN apk add --no-cache \
           openssl \
           imagemagick \
           lsof \
@@ -12,8 +12,7 @@ RUN apk add -U \
           git \
           jq \
           mysql-client \
-          python python-dev py2-pip && \
-        rm -rf /var/cache/apk/*
+          python python-dev py2-pip
 
 RUN pip install mcstatus
 
