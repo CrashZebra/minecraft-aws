@@ -18,12 +18,13 @@ RUN pip install rotate-backups
 ADD https://github.com/itzg/rcon-cli/releases/download/1.3/rcon-cli_linux_amd64 /usr/local/bin/rcon-cli
 COPY crontab /etc/crontabs/root
 COPY minecraft_autobackup.sh /usr/local/bin/
+COPY cron_runner.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/*
 
 VOLUME ["/data"]
 WORKDIR /data
 
-CMD ["/usr/sbin/crond", "-f"]
+CMD ["/usr/local/bin/cron_runner.sh"]
 
 ENV UID=1000 GID=1000 \
     RCON_HOST=server RCON_PORT=25575 RCON_PASSWORD=minecraft
