@@ -27,6 +27,30 @@ case "X$WORLD" in
       [ -d "/data/world/DIM-1" ] && mv -f "/data/world/DIM-1" "/data/world_nether"
     fi
     ;;
+  X[Ss]3*)
+    echo "Downloading world from S3"
+    echo "$WORLD"
+    aws s3 cp $WORLD file:///data/world.zip
+    echo "Unzipping word"
+    unzip -q /data/world.zip
+    rm -f /data/world.zip
+    if [ ! -d /data/world ]; then
+      echo World directory not found
+      for i in /data/*/level.dat; do
+        if [ -f "$i" ]; then
+          d=`dirname "$i"`
+          echo Renaming world directory from $d
+          mv -f "$d" /data/world
+        fi
+      done
+    fi
+    if [ "$TYPE" = "SPIGOT" ]; then
+      # Reorganise if a Spigot server
+      echo "Moving End and Nether maps to Spigot location"
+      [ -d "/data/world/DIM1" ] && mv -f "/data/world/DIM1" "/data/world_the_end"
+      [ -d "/data/world/DIM-1" ] && mv -f "/data/world/DIM-1" "/data/world_nether"
+    fi
+    ;;
   *)
     echo "Invalid URL given for world: Must be HTTP or HTTPS and a ZIP file"
     ;;

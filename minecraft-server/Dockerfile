@@ -32,6 +32,7 @@ ADD https://github.com/itzg/restify/releases/download/1.0.4/restify_linux_amd64 
 ADD https://github.com/itzg/rcon-cli/releases/download/1.3/rcon-cli_linux_amd64 /usr/local/bin/rcon-cli
 COPY start* /
 COPY mcadmin.jq /usr/share
+COPY crontab /etc/crontabs/root
 RUN chmod +x /usr/local/bin/*
 
 VOLUME ["/data","/mods","/config","/plugins","/home/minecraft"]

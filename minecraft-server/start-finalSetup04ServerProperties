@@ -114,4 +114,7 @@ if [ ! -e server.properties ]; then
   fi
 fi
 
+# start cron in the background
+/usr/sbin/crond
+
 exec /start-minecraftFinalSetup $@

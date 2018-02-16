@@ -91,3 +91,5 @@ else
         exec java $JVM_XX_OPTS $JVM_OPTS -jar $SERVER "$@" $EXTRA_ARGS
     fi
 fi
+
+echo "Shutting down now!!" >> /data/lifecycle.log
