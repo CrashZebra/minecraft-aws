@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 RUN apk add --no-cache \
-          python py2-pip
+    python py2-pip bash
 
 RUN pip install rotate-backups
 
